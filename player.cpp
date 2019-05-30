@@ -61,6 +61,9 @@ void Player::setUri(const QString & uri)
         }
     }
     if (m_pipeline) {
+        // Comment out this line if you WANT audio
+        m_pipeline->setProperty("audio-sink", QGst::ElementFactory::make("fakesink", "audiosink"));
+
         m_pipeline->setProperty("uri", realUri);
     }
 }

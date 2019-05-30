@@ -53,6 +53,7 @@ void MediaApp::openFile(const QString & fileName)
     m_player->stop();
     m_player->setUri(fileName);
     m_player->play();
+	    makeFullScreen();
 }
 void MediaApp::open()
 {
@@ -61,19 +62,31 @@ void MediaApp::open()
         openFile(fileName);
     }
 }
-void MediaApp::toggleFullScreen()
+
+void MediaApp::makeFullScreen()
 {
-    if (isFullScreen()) {
+        setMouseTracking(true);
+        m_player->setMouseTracking(true);
+        hideControls();
+        showFullScreen();
+}
+
+void MediaApp::makeWindowed()
+{
         setMouseTracking(false);
         m_player->setMouseTracking(false);
         m_fullScreenTimer.stop();
         showControls();
         showNormal();
+}
+
+
+void MediaApp::toggleFullScreen()
+{
+    if (isFullScreen()) {
+	    makeWindowed();
     } else {
-        setMouseTracking(true);
-        m_player->setMouseTracking(true);
-        hideControls();
-        showFullScreen();
+	    makeFullScreen();
     }
 }
 void MediaApp::onStateChanged()

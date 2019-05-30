@@ -40,6 +40,8 @@ private Q_SLOTS:
     void showControls(bool show = true);
     void hideControls() { showControls(false); }
 protected:
+    void makeFullScreen();
+    void makeWindowed();
     void mouseMoveEvent(QMouseEvent *event);
 private:
     QToolButton *initButton(QStyle::StandardPixmap icon, const QString & tip,
